@@ -1,0 +1,35 @@
+---
+title: "rtweet Sentiment Analysis"
+author: "Matthew Hendrickson"
+date: "4/18/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+## Getting Started
+
+To start any project, we first need to set up the environment.
+
+The following libraries are used through this project.
+
+```{r packages, message=FALSE, warning=FALSE}
+library("rtweet")
+library("tidyverse")
+library("scales")
+```
+
+
+
+## Getting Twitter Data
+
+
+
+```{r data}
+
+```
+
