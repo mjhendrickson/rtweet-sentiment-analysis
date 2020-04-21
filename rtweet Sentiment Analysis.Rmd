@@ -1,7 +1,7 @@
 ---
 title: "rtweet Sentiment Analysis"
 author: "Matthew Hendrickson"
-date: "4/18/2020"
+date: "4/20/2020"
 output: html_document
 ---
 
@@ -21,15 +21,66 @@ The following libraries are used through this project.
 library("rtweet")
 library("tidyverse")
 library("scales")
+library("skimr")
 ```
 
 
 
-## Getting Twitter Data
+# Getting Twitter Data
+
+## Selecting the object of analysis
+
+The first step is to evaluate handles and hashtags to ensure there is enough data available for analysis.
+
+I'll start with the following and get the record counts for each:
+1. Myself - [@mjhendrickson](https://twitter.com/mjhendrickson)
+2. R Ladies Global, which is an incredibly supportive organization - [@RLadiesGlobal](https://twitter.com/RLadiesGlobal)
+3. RStudio, the fantastic R IDE - 
+[@rstudio](https://twitter.com/rstudio)
+
+```{r mh record count}
+mh_test <- get_timeline('mjhendrickson', n = 1)
+           mh_test$statuses_count
+```
+
+```{r rl record count}
+rl_test <- get_timeline('RLadiesGlobal', n = 1)
+           rl_test$statuses_count
+```
+
+```{r rs record count}
+rs_test <- get_timeline('rstudio', n = 1)
+           rs_test$statuses_count
+```
+
+```{r rstats record count}
+rstats_test <- search_tweets('#rstats', n = 1)
+               rstats_test$statuses_count
+```
+
+To play it safe, I'll begin this analysis with myself.
 
 
 
-```{r data}
+## Pulling the data
 
+The data pull will involve pulling the timeline for [@mjhendrickson](https://twitter.com/mjhendrickson).
+
+```{r mh data pull}
+mh <- get_timeline('mjhendrickson', n = 5000) # 5000 ensures all records are taken
+```
+
+## Contents of the data
+
+The data itself consists of the following fields:
+
+```{r mh available fields}
+print(colnames(mh))
+```
+
+Each field can be evaluated individually. Before that step is taken, a tool such as `DataExplorer` can be useful as it provides a fast first-pass at exploratory data analysis (EDA).
+
+```{r mh skim}
+skim(mh)
 ```
 
